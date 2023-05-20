@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "TEST": {
+      "address": "0xB89eFb9D4E0019af9F07377E51a125865Da6c149",
+      "startBlock": 9035015
+    }
+  }
+}
