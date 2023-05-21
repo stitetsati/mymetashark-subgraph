@@ -3,28 +3,53 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: TEST
+    name: MyMetaShark
     network: goerli
     source:
       address: "0xB89eFb9D4E0019af9F07377E51a125865Da6c149"
-      abi: TEST
+      abi: MyMetaShark
       startBlock: 9035015
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - ApprovalForAll
-        - Transfer
+        - User
       abis:
-        - name: TEST
-          file: ./abis/TEST.json
+        - name: MyMetaShark
+          file: ./abis/MyMetaShark.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,indexed uint256)
-          handler: handleApproval
-        - event: ApprovalForAll(indexed address,indexed address,bool)
-          handler: handleApprovalForAll
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/test.ts
+      file: ./src/myMetaShark.ts
+  - kind: ethereum
+    name: MyMetaSharkRaffle
+    network: goerli
+    source:
+      address: "0x580a2F4e4EAa06335737acf7c038A16c6BcEFc94"
+      abi: MyMetaSharkRaffle
+      startBlock: 9035903
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Exploration
+        - Ticket
+        - User
+        - Raffle
+      abis:
+        - name: MyMetaSharkRaffle
+          file: ./abis/MyMetaSharkRaffle.json
+      eventHandlers:
+        - event: Explored(indexed uint256,indexed uint256,uint256)
+          handler: handleExplored
+        - event: RaffleConcluded(indexed uint256,uint256)
+          handler: handleRaffleConcluded
+        - event: RaffleCreated(indexed uint256,uint256,uint256,uint256,uint256)
+          handler: handleRaffleCreated
+        - event: TicketClaimed(indexed uint256,indexed uint256,uint256)
+          handler: handleTicketClaimed
+        - event: RandomNumberRequested(indexed uint256,uint256,uint256)
+          handler: handleRandomNumberRequested
+      file: ./src/myMetaSharkRaffle.ts

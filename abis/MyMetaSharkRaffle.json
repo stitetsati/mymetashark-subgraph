@@ -1,0 +1,180 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_myMetaShark", "type": "address" },
+      { "internalType": "address", "name": "_linkToken", "type": "address" },
+      { "internalType": "address", "name": "_vrfV2Wrapper", "type": "address" },
+      { "internalType": "uint32", "name": "_vrfCallbackGasLimit", "type": "uint32" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "uint256", "name": "sharkTokenId", "type": "uint256" },
+      { "indexed": true, "internalType": "uint256", "name": "raffleIndex", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "name": "Explored",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" },
+      { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "uint256", "name": "raffleIndex", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "randomNumber", "type": "uint256" }
+    ],
+    "name": "RaffleConcluded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "uint256", "name": "raffleIndex", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "startTime", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "duration", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "ticketInterval", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "winnerCount", "type": "uint256" }
+    ],
+    "name": "RaffleCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "uint256", "name": "raffleIndex", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "vrfRequestId", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "vrfRequestEstimatedExpense", "type": "uint256" }
+    ],
+    "name": "RandomNumberRequested",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "uint256", "name": "sharkTokenId", "type": "uint256" },
+      { "indexed": true, "internalType": "uint256", "name": "raffleIndex", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "ticketNumber", "type": "uint256" }
+    ],
+    "name": "TicketClaimed",
+    "type": "event"
+  },
+  { "inputs": [{ "internalType": "uint256[]", "name": "tokenIds", "type": "uint256[]" }], "name": "claimTicket", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+  { "inputs": [], "name": "concludeCurrentRaffle", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+  { "inputs": [], "name": "currentRaffleIndex", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "name": "explorations",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  { "inputs": [{ "internalType": "uint256[]", "name": "tokenIds", "type": "uint256[]" }], "name": "explore", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "raffleIndex", "type": "uint256" }],
+    "name": "getRaffle",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+          { "internalType": "uint256", "name": "duration", "type": "uint256" },
+          { "internalType": "uint256", "name": "ticketInterval", "type": "uint256" },
+          { "internalType": "uint256", "name": "winnerCount", "type": "uint256" },
+          { "internalType": "uint256", "name": "ticketsClaimed", "type": "uint256" },
+          { "internalType": "uint256", "name": "randomNumber", "type": "uint256" },
+          { "internalType": "uint256", "name": "vrfRequestId", "type": "uint256" },
+          { "internalType": "uint256", "name": "vrfRequestEstimatedExpense", "type": "uint256" }
+        ],
+        "internalType": "struct MyMetaSharkRaffle.Raffle",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "raffleIndex", "type": "uint256" }],
+    "name": "getRaffleWinners",
+    "outputs": [{ "internalType": "uint256[]", "name": "", "type": "uint256[]" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "sharkTokenId", "type": "uint256" },
+      { "internalType": "uint256", "name": "raffleIndex", "type": "uint256" }
+    ],
+    "name": "getTickets",
+    "outputs": [{ "internalType": "uint256[]", "name": "", "type": "uint256[]" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  { "inputs": [], "name": "myMetaShark", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" },
+  { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "raffles",
+    "outputs": [
+      { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+      { "internalType": "uint256", "name": "duration", "type": "uint256" },
+      { "internalType": "uint256", "name": "ticketInterval", "type": "uint256" },
+      { "internalType": "uint256", "name": "winnerCount", "type": "uint256" },
+      { "internalType": "uint256", "name": "ticketsClaimed", "type": "uint256" },
+      { "internalType": "uint256", "name": "randomNumber", "type": "uint256" },
+      { "internalType": "uint256", "name": "vrfRequestId", "type": "uint256" },
+      { "internalType": "uint256", "name": "vrfRequestEstimatedExpense", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_requestId", "type": "uint256" },
+      { "internalType": "uint256[]", "name": "_randomWords", "type": "uint256[]" }
+    ],
+    "name": "rawFulfillRandomWords",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+      { "internalType": "uint256", "name": "duration", "type": "uint256" },
+      { "internalType": "uint256", "name": "ticketInterval", "type": "uint256" },
+      { "internalType": "uint256", "name": "winnerCount", "type": "uint256" }
+    ],
+    "name": "setupRaffle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "name": "sharkTokenIdToRaffleTicketNumbers",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  { "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+  { "inputs": [], "name": "vrfCallbackGasLimit", "outputs": [{ "internalType": "uint32", "name": "", "type": "uint32" }], "stateMutability": "view", "type": "function" }
+]

@@ -1,6 +1,64 @@
-type ExampleEntity @entity {
-  id: Bytes!
-  count: BigInt!
-  owner: Bytes! # address
-  approved: Bytes! # address
+type User @entity {
+  "User ETH address"
+  id: ID!
+  "Array of Token Ids"
+  sharks: [Shark!]! @derivedFrom(field:"user")
+  participatedRaffles: [UserParticipation!]! @derivedFrom(field:"user")
+}
+
+type Shark @entity {
+  id: ID!
+  user: User!
+  participatedRaffles: [SharkParticipation!]! @derivedFrom(field:"shark")
+  tickets: [Ticket!]! @derivedFrom(field:"shark")
+  explorations: [Exploration!]! @derivedFrom(field:"shark")
+  wonTickets: [Ticket!]!
+}
+
+type Raffle @entity {
+  id: ID!
+  startTime: Int!
+  endTime: Int!
+  duration: Int!
+  ticketInterval: Int!
+  winnerCount: Int!
+  ticketsClaimed: Int!
+  randomNumberRequested: Boolean!
+  randomNumber: String!
+  tickets: [Ticket!]! @derivedFrom(field:"raffle")
+  users: [UserParticipation!]! @derivedFrom(field:"raffle")
+  sharks: [SharkParticipation!]! @derivedFrom(field:"raffle")
+  explorations: [Exploration!]! @derivedFrom(field:"raffle")
+  wonTickets: [Ticket!]!
+  sharkParticipationCount: Int!
+  userParticipationCount: Int!
+}
+
+
+type UserParticipation @entity {
+  id: ID!
+  user: User!
+  raffle: Raffle!
+}
+
+type SharkParticipation @entity {
+  id: ID!
+  shark: Shark!
+  raffle: Raffle!
+}
+
+type Exploration @entity {
+  id: ID!
+  shark: Shark!
+  raffle: Raffle!
+  startTime: Int!
+  endTime: Int!
+}
+
+type Ticket @entity {
+  id: ID!
+  shark: Shark!
+  raffle: Raffle!
+  ticketNumber: Int!
+  won: Boolean!
 }
