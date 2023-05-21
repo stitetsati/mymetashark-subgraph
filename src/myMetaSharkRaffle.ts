@@ -57,6 +57,7 @@ export function handleExplored(event: Explored): void {
     // update raffle
     raffle.userParticipationCount += 1;
   }
+  raffle.save();
 }
 
 export function handleTicketClaimed(event: TicketClaimed): void {
